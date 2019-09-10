@@ -75,7 +75,24 @@ runcmd(struct cmd *cmd)
     /* MARK START task2
      * TAREFA2: Implemente codigo abaixo para executar
      * comandos simples. */
-    fprintf(stderr, "exec nao implementado\n");
+    
+    int pidChild;
+
+    if ((pidChild = fork1()) < 0) {
+      perror("Bad Fork!");
+      exit(1);
+    }
+    else if (pidChild == 0){
+      if (execvp(ecmd->argv[0], ecmd->argv) < 0) {
+        perror("Erro Exec");
+        exit(1);
+      }
+    } 
+    else { 
+      int status;
+      waitpid(pidChild, &status, 0); 
+    }
+
     /* MARK END task2 */
     break;
 
@@ -85,7 +102,9 @@ runcmd(struct cmd *cmd)
     /* MARK START task3
      * TAREFA3: Implemente codigo abaixo para executar
      * comando com redirecionamento. */
-    fprintf(stderr, "redir nao implementado\n");
+    
+
+
     /* MARK END task3 */
     runcmd(rcmd->cmd);
     break;
