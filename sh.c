@@ -7,6 +7,7 @@
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <sys/wait.h>
+#include <errno.h>
 
 /* MARK NAME Bruno Vieira */
 /* MARK NAME Isabela Meneguci */
@@ -75,22 +76,20 @@ runcmd(struct cmd *cmd)
     /* MARK START task2
      * TAREFA2: Implemente codigo abaixo para executar
      * comandos simples. */
-    
-    int pidChild;
 
-    if ((pidChild = fork1()) < 0) {
-      perror("Bad Fork!");
+    if ((r = fork1()) < 0) {
+      perror("Erro de fork!");
       exit(1);
     }
-    else if (pidChild == 0){
+    else if (r == 0){
       if (execvp(ecmd->argv[0], ecmd->argv) < 0) {
-        perror("Erro Exec");
+        perror("Erro de exec");
         exit(1);
       }
     } 
     else { 
       int status;
-      waitpid(pidChild, &status, 0); 
+      waitpid(r, &status, 0); 
     }
 
     /* MARK END task2 */
@@ -103,7 +102,11 @@ runcmd(struct cmd *cmd)
      * TAREFA3: Implemente codigo abaixo para executar
      * comando com redirecionamento. */
     
-
+    close(rcmd->fd);
+    if(open(rcmd->file,rcmd->mode, 0666) < 0){
+      fprintf(stderr, "Erro de redirecionamento: %s\n", strerror(errno));
+      exit(1);
+    }
 
     /* MARK END task3 */
     runcmd(rcmd->cmd);
@@ -114,7 +117,25 @@ runcmd(struct cmd *cmd)
     /* MARK START task4
      * TAREFA4: Implemente codigo abaixo para executar
      * comando com pipes. */
-    fprintf(stderr, "pipe nao implementado\n");
+    
+    pipe(p);
+    
+    if ((r = fork1()) < 0) {
+      perror("Erro de fork!");
+      exit(1);
+    }
+    else if (r == 0){
+      dup2(p[1], 1 );
+      runcmd(pcmd->left);
+      exit(0);
+    }
+    else{ 
+      dup2(p[0], 0);
+      close(p[0]);
+      close(p[1]);
+    }
+    runcmd(pcmd->right);
+
     /* MARK END task4 */
     break;
   }    
