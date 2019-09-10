@@ -9,18 +9,16 @@ material da Internet nem obtiveram código de terceiros.
 
 2. Membros do grupo e alocação de esforço
 
-Preencha as linhas abaixo com o nome e o e-mail dos integrantes do
-grupo.  Substitua XX pela contribuição de cada membro do grupo no
-desenvolvimento do trabalho.
-
 Bruno Vieira <bruno.antonio.vieira@icloud.com> 50%
 Isabela Meneguci <isabellameneguci@gmail.com> 50%
 
 3. Referências bibliográficas
 
-Adicione aqui as referências bibliográficas.
+- https://stackoverflow.com/questions/27541910/how-to-use-execvp
+- https://stackoverflow.com/questions/32810981/fork-function-in-c
+- slides da disciplina
+- livro-texto: Fundamentos de Sistemas Operacionais
 
 4. Estruturas de dados
 
-Descreva e justifique as estruturas de dados e algoritmos utilizados
-em sua solução.
+Na Tarefa 1, 
