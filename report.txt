@@ -19,6 +19,8 @@ Isabela Meneguci <isabellameneguci@gmail.com> 50%
 - https://www.geeksforgeeks.org/dup-dup2-linux-system-call/
 - slides da disciplina
 - livro-texto: Fundamentos de Sistemas Operacionais
+- http://manpages.ubuntu.com/manpages/xenial/pt/man3/exec.3.html
+- https://support.sas.com/documentation/onlinedoc/sasc/doc/lr2/execvp.htm
 
 4. Estruturas de dados
 
