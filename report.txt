@@ -16,9 +16,25 @@ Isabela Meneguci <isabellameneguci@gmail.com> 50%
 
 - https://stackoverflow.com/questions/27541910/how-to-use-execvp
 - https://stackoverflow.com/questions/32810981/fork-function-in-c
+- https://www.geeksforgeeks.org/dup-dup2-linux-system-call/
 - slides da disciplina
 - livro-texto: Fundamentos de Sistemas Operacionais
 
 4. Estruturas de dados
 
-Na Tarefa 1, 
+Na Tarefa 1, não foram implementadas estruturas de dados e algoritmos
+diferentes dos que já haviam. Apenas constatamos que o if testa se a 
+chamada de sistema chdir() retorna um erro, ou seja, se o diretório não 
+é válido ou não encontrado.
+
+Na tarefa 2, primeiro, chamamos um fork() para criar um novo processo,
+e imprimimos uma mensagem de erro, caso seja necessário. Em seguida, caso
+estejamos no processo filho criado, chamamos um exec() e imprimimos um
+erro, caso haja. Se estivermos no processo pai, chamamos o wait().
+
+Na tarefa 3, abrimos o arquivo a ser redirecionado, tanto para leitura
+quanto para escrita, utilizando a função open com determinados parâmetros.
+
+Na tarefa 4, seguimos a mesma lógica de fork() e exec() da tarefa 2, 
+utilizando a chamada de sistema dup2() para criar uma cópia do descritor
+de arquivo.
