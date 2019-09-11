@@ -22,19 +22,44 @@ Isabela Meneguci <isabellameneguci@gmail.com> 50%
 
 4. Estruturas de dados
 
-Na Tarefa 1, não foram implementadas estruturas de dados e algoritmos
+* Na Tarefa 1, não foram implementadas estruturas de dados e algoritmos
 diferentes dos que já haviam. Apenas constatamos que a condicional "if" 
 testa se a chamada de sistema chdir() retorna um erro, ou seja, se o diretório 
 não é válido ou não encontrado. E apenas imprimimos o erro correto no print.
 
-Na tarefa 2, primeiro, chamamos um fork() para criar um novo processo. Após esse passo, se o identificador da chamada do fork for menor que 0 houve um erro ao criar o processo, neste caso imprimimos o erro “Erro de Fork ”. O novo processo é composto por uma cópia do espaço de endereçamento do processo original. Esse mecanismo permite que o processo-pai se comunique facilmente com seu processo-filho. 
-Caso o identificador da chamada do fork seja igual a 0, significa que estamos no processo filho que foi criado. Sendo assim, chamamos o comando execvp ( é uma versão da chamada de sistema exec ( )) e nele passamos dois parâmetros para ele. O primeiro parâmetro sobrepõe o espaço de endereçamento do processo pai, ou seja é o caminho em que o comando será executado, caso o esse argumento contiver uma barra ( /), presume-se que o caminho tenha sido especificado. Caso contrário, os diretórios especificados pela variável de ambiente PATH  serão procurados na tentativa de localizar o arquivo. Já o segundo parâmetro será o próprio comando que será executado. Por exemplo: se formos executar o comando “ls” (que lista os arquivos e diretórios) o comando ficaria: execlp(“/bin/ls”,”ls”). Durante esse processo, caso aconteça algum erro durante o exec imprimimos uma mensagem de erro. 
-Caso não tenha nenhum erro na execução do fork e caso o identificador do fork não for igual a zero, significa que estamos no processo pai e chamamos o comando wait. O processo pai utiliza o comando wait() para ser removido da fila de prontos até o encerramento do filho.
+* Na tarefa 2, primeiro, chamamos um fork() para criar um novo processo. Após 
+esse passo, se o identificador da chamada do fork for menor que 0 houve um erro 
+ao criar o processo, neste caso imprimimos o erro “Erro de Fork ”. O novo processo
+ é composto por uma cópia do espaço de endereçamento do processo original. Esse me
+canismo permite que o processo-pai se comunique facilmente com seu processo-filho.
+ 
+Caso o identificador da chamada do fork seja igual a 0, significa que estamos no 
+processo filho que foi criado. Sendo assim, chamamos o comando execvp ( é uma 
+versão da chamada de sistema exec ( )) e nele passamos dois parâmetros para ele. 
+O primeiro parâmetro sobrepõe o espaço de endereçamento do processo pai, ou seja 
+é o caminho em que o comando será executado, caso o esse argumento contiver uma 
+barra ( /), presume-se que o caminho tenha sido especificado. Caso contrário, os 
+diretórios especificados pela variável de ambiente PATH  serão procurados na 
+tentativa de localizar o arquivo. Já o segundo parâmetro será o próprio comando 
+que será executado. Por exemplo: se formos executar o comando “ls” (que lista os 
+arquivos e diretórios) o comando ficaria: execlp(“/bin/ls”,”ls”). 
+Durante esse processo, caso aconteça algum erro durante o exec imprimimos uma 
+mensagem de erro. 
+
+Caso não tenha nenhum erro na execução do fork e caso o identificador do fork não 
+for igual a zero, significa que estamos no processo pai e chamamos o comando wait.
+O processo pai utiliza o comando wait() para ser removido da fila de prontos até o
+encerramento do filho.
 
 
-Na tarefa 3, abrimos o arquivo a ser redirecionado pelos comandos “< ou >”. Assim, utilizamos a função open tanto para a escrita como para a leitura. E passamos para ela 3 parâmetros: o primeiro é o caminho do arquivo, o segundo é o método que o arquivo deve ser aberto (leitura, escrita, somente leitura, etc). E o terceiro (e que não seria obrigatório a sua utilização) é a permissão do arquivo que no caso do TP optamos por passar a permissão 0666.
+* Na tarefa 3, abrimos o arquivo a ser redirecionado pelos comandos “< ou >”.
+Assim, utilizamos a função open tanto para a escrita como para a leitura. 
+E passamos para ela 3 parâmetros: o primeiro é o caminho do arquivo, o segundo é 
+o método que o arquivo deve ser aberto (leitura, escrita, somente leitura, etc). 
+E o terceiro (e que não seria obrigatório a sua utilização) é a permissão do 
+arquivo que no caso do TP optamos por passar a permissão 0666.
 
-Na tarefa 4, seguimos a mesma lógica de fork() e exec() da tarefa 2, 
+* Na tarefa 4, seguimos a mesma lógica de fork() e exec() da tarefa 2, 
 utilizando a chamada de sistema dup2() para criar uma cópia do descritor
 de arquivo.
 
